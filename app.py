@@ -6,7 +6,6 @@ def add(numbers):
         if numbers[0:2] == "//":
             numbers = numbers[2:]
             delimiter = numbers[0]
-            numbers = numbers.replace(numbers[0], " ")
         for i in numbers:
             if i in [",", "\n", delimiter]:
                 numbers = numbers.replace(i, " ")
@@ -19,5 +18,6 @@ def add(numbers):
         if len(negative) > 0:
             raise Exception("negative numbers not allowed " + str(",".join(negative)))
         for i in numbers:
-            sum += int(i)
+            if int(i) <= 1000:
+                sum += int(i)
         return sum

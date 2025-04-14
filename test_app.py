@@ -23,19 +23,25 @@ def test_add_for_newline_separated_values():
 def test_custom_delimiter():
     assert add("//;\n1;2") == 3
     assert add("//^\n1^2^3") == 6
-    assert add("//*\n1*2*3*4") == 10
-    assert add("//;\n1;2,3\n4") == 10
+    assert add("//*\n1*2*7") == 10
+    assert add("//;\n1;2,3\n40") == 46
+    assert add("//-\n1-2,3\n4,5") == 15
     print("✓ All add tests passed-test_custom_delimiter")
 
 def test_negative_numbers():
-    with pytest.raises(Exception, match="negative numbers not allowed -1"):
-        add("-1,2")
     with pytest.raises(Exception, match="negative numbers not allowed -2"):
         add("1,-2")
     with pytest.raises(Exception, match="negative numbers not allowed -1,-2"):
         add("-1,-2")
+    with pytest.raises(Exception, match="negative numbers not allowed -1,-2,-3"):
+        add("-1,-2,-3")
     print("✓ All add tests passed-test_negative_numbers")
 
+def test_numbers_bigger_than_1000():
+    assert add("1,2,3,1001") == 6
+    assert add("1,2,3,1000") == 1006
+    assert add("1,2,3,1000,1001") == 1006
+    print("✓ All add tests passed-test_numbers_bigger_than_1000")
 
 
 if __name__ == "__main__":
@@ -45,6 +51,7 @@ if __name__ == "__main__":
         test_add_for_newline_separated_values()
         test_custom_delimiter()
         test_negative_numbers()
+        test_numbers_bigger_than_1000()
     except ImportError:
         print("❌ Test failed: calculator.py or add function not found")
     except AssertionError as e:

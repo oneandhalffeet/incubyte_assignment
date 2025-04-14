@@ -37,16 +37,27 @@ def test_negative_numbers():
         add("-1,-2,-3")
     print("✓ All add tests passed-test_negative_numbers")
 
-def test_delimiter_of_any_length():
-    assert add("//[***]\n1***2***3") == 6
-    assert add("//[*#]\n1*#2*#3,4") == 10
-    print("✓ All add tests passed-test_delimiter_of_any_length")
 
 def test_numbers_bigger_than_1000():
     assert add("1,2,3,1001") == 6
     assert add("1,2,3,1000") == 1006
     assert add("1,2,3,1000,1001") == 1006
     print("✓ All add tests passed-test_numbers_bigger_than_1000")
+
+def test_delimiter_of_any_length():
+    assert add("//[***]\n1***2***3") == 6
+    assert add("//[*#]\n1*#2*#3,4") == 10
+    print("✓ All add tests passed-test_delimiter_of_any_length")
+
+def test_big_delimiters():
+    assert add("//[***]\n1***2***3") == 6
+    assert add("//[***]\n1***2***3,4") == 10
+    print("✓ All add tests passed-test_big_delimiters")
+
+def test_multiple_delimiters():
+    assert add("//[*][%]\n1*2%3") == 6
+    assert add("//[*][%][#]\n1*2%3#4") == 10
+    print("✓ All add tests passed-test_multiple_delimiters")
 
 
 if __name__ == "__main__":
@@ -57,6 +68,10 @@ if __name__ == "__main__":
         test_custom_delimiter()
         test_negative_numbers()
         test_numbers_bigger_than_1000()
+        test_delimiter_of_any_length()
+        test_big_delimiters()
+        test_multiple_delimiters()
+        print("✓ All add tests passed")
     except ImportError:
         print("❌ Test failed: calculator.py or add function not found")
     except AssertionError as e:

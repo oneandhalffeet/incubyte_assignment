@@ -1,17 +1,22 @@
+import re
 def add(numbers):
     if numbers == "":
         return 0
     else:
         # getting the delimiter from string
-        delimiter = ""
+        delimiter = [",", "\n"]
         if numbers[0:2] == "//":
-            numbers = numbers[2:]
-            delimiter = numbers[0]
+            # if multiple delimiters are added in list
+            if numbers[2] == "[":
+                delimiter.extend(re.findall(r'\[(.*?)\]', numbers))
+            # if single delimiters is displayed
+            else:
+                delimiter.append(numbers[2])
+            numbers = re.search(r'\n(.*)', numbers, re.DOTALL).group(1)
 
         # replacing all the delimiters with space
-        for i in numbers:
-            if i in [",", "\n", delimiter]:
-                numbers = numbers.replace(i, " ")
+        for i in delimiter:
+            numbers = numbers.replace(i, " ")
 
         numbers = numbers.split()
         sum = 0

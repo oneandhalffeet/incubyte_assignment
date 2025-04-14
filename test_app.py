@@ -37,6 +37,11 @@ def test_negative_numbers():
         add("-1,-2,-3")
     print("✓ All add tests passed-test_negative_numbers")
 
+def test_delimiter_of_any_length():
+    assert add("//[***]\n1***2***3") == 6
+    assert add("//[*#]\n1*#2*#3,4") == 10
+    print("✓ All add tests passed-test_delimiter_of_any_length")
+
 def test_numbers_bigger_than_1000():
     assert add("1,2,3,1001") == 6
     assert add("1,2,3,1000") == 1006

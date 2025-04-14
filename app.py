@@ -5,6 +5,8 @@ def add(numbers):
         for i in numbers:
             if i == ",":
                 numbers = numbers.replace(i, " ")
+            elif i == "\n":
+                numbers = numbers.replace(i, " ")
         numbers = numbers.split()
         sum = 0
         for i in numbers:

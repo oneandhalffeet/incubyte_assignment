@@ -27,6 +27,15 @@ def test_custom_delimiter():
     assert add("//;\n1;2,3\n4") == 10
     print("✓ All add tests passed-test_custom_delimiter")
 
+def test_negative_numbers():
+    with pytest.raises(Exception, match="negative numbers not allowed -1"):
+        add("-1,2")
+    with pytest.raises(Exception, match="negative numbers not allowed -2"):
+        add("1,-2")
+    with pytest.raises(Exception, match="negative numbers not allowed -1,-2"):
+        add("-1,-2")
+    print("✓ All add tests passed-test_negative_numbers")
+
 
 
 if __name__ == "__main__":
@@ -35,6 +44,7 @@ if __name__ == "__main__":
         test_add_for_comma_separated_values()
         test_add_for_newline_separated_values()
         test_custom_delimiter()
+        test_negative_numbers()
     except ImportError:
         print("❌ Test failed: calculator.py or add function not found")
     except AssertionError as e:
